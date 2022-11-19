@@ -5,38 +5,40 @@ import java.time.Instant;
 
 class Block
 {
-    private final double timestamp = Instant.now().getEpochSecond();
-    private final int index;
+    final int x;
+    final int y;
+
     private final String data;
-    private final String previousHash;
+    private final double timestamp = Instant.now().getEpochSecond();
     private String hash;
     private int nonce = 0;
     
     // set local variables
-    public Block(int index, String data, String previousHash) {
-        this.index = index;
+    public Block(String data, int x, int y) {
         this.data = data;
-        this.previousHash = previousHash;
+        this.x = x;
+        this.y = y;
+        hash = calculateHash();
     }
 
     // calculate SHA256 hash of (sum of all local vars)
     public String calculateHash() {
-        String str = index + timestamp + data + previousHash + nonce;
+        String str = x + y + timestamp + data + nonce;
 
         MessageDigest md = null;
         try {
-            md = MessageDigest.getInstance("SHA-256");
+            md = MessageDigest.getInstance("SHA-256");  // grabs the SHA-256 algorithm
         } catch (NoSuchAlgorithmException e) {
-            System.out.println("ERROR: Error with SHA-256 hashing. " + e.getMessage());
+            System.out.println("HASHING ERROR: " + e.getMessage());
         }
         assert md != null;
-        byte[] hashBytes = md.digest(str.getBytes(StandardCharsets.UTF_8)); // get hash in bytes
+        byte[] hashBytes = md.digest(str.getBytes(StandardCharsets.UTF_8)); // gets SHA-256 hash in bytes
 
         StringBuilder result = new StringBuilder();     // StringBuilder to save re-allocating the String every loop
         for (byte b : hashBytes) {                      // Convert each byte to hex
             result.append(String.format("%02x", b));
         }
-        return result.toString();
+        return result.toString(); // return hash as hexadecimal string
     }
     
     // PoW
