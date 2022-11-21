@@ -12,6 +12,7 @@ class Block
     private final double timestamp = Instant.now().getEpochSecond();
     private String hash;
     private int nonce = 0;
+    private int validators = 0;
     
     // set local variables
     public Block(String data, int x, int y) {
@@ -52,6 +53,14 @@ class Block
         }
 
         System.out.println("Block mined: " + hash);
+    }
+
+    public void incrementValidators() {
+        validators++;
+    }
+
+    public int validatorCount() {
+        return validators;
     }
   
 }
