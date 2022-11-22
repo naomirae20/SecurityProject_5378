@@ -9,7 +9,7 @@ public class Graph
     public int difficulty = 4;  // arbitrary
     public double searchRadius = 4.0;
 
-    private final ArrayList<Block> graph = new ArrayList<>();
+    public final ArrayList<Block> graph = new ArrayList<>();
     private final ArrayList<LinkedList<Block>> neighborLists = new ArrayList<>();
 
     public Block addBlock(String data, int x, int y) {
