@@ -12,3 +12,4 @@ For running in a terminal, run ``java -jar Group15_Tangle.jar``.
 * Tip Selection - Random in Range
 * Tip Validation using W-OTS
 * Proof-of-Work demonstration
+* Prototype driver using terminal output
