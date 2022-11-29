@@ -16,7 +16,7 @@ public class Driver {
                 else {
                     char c = ' ';
                     for (Block b : g.graph) {
-                        if (j == b.x + 1 && i == b.y + 1) {
+                        if (j == b.x && i == b.y) {
                             c = 'O';
                         }
                     }
