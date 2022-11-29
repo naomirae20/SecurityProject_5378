@@ -2,6 +2,7 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.geom.*;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class Gui extends JPanel {
 
@@ -9,13 +10,15 @@ public class Gui extends JPanel {
     private final double block_thickness_in_pixels = 10; 
     private final double number_of_partitions = 12.0;
 
+    private Graph graph;
     private final int total_blocks;
     private final double search_radius;
     private double max_x_coordinate_value;
     private double max_y_coordinate_value;
     private ArrayList<double[]> coordinate_pairs;
 
-    public Gui(double x, double y, double radius, int total_blocks) {
+    public Gui(Graph g, double x, double y, double radius, int total_blocks) {
+        this.graph = g;
         this.max_x_coordinate_value = x;
         this.max_y_coordinate_value = y;
         this.search_radius = radius;
@@ -26,6 +29,20 @@ public class Gui extends JPanel {
     public void add_coordinate_pair(double x, double y) {
         double[] new_pair = {x, y};
         coordinate_pairs.add(new_pair);
+    }
+
+    private void paint_tips(Graphics2D Gs, double width, double height) {
+        for (int i = 0; i < graph.neighborLists.size(); i++) {
+            if (graph.getNeighbors(i) != null) {
+                double x1 = (coordinate_pairs.get(i)[0] / max_x_coordinate_value) * (width - 2 * margin) + margin;
+                double y1 = (coordinate_pairs.get(i)[1] / max_y_coordinate_value) * (height - 2 * margin) + margin;
+                for (Block b : graph.getNeighbors(i)) {
+                    double x2 = (b.x / max_x_coordinate_value) * (width - 2 * margin) + margin;
+                    double y2 = ((50 - b.y) / max_y_coordinate_value) * (height - 2 * margin) + margin;
+                    Gs.draw(new Line2D.Double(x1, y1, x2, y2));
+                }
+            }
+        }
     }
 
     private void paint_partitions(Graphics2D Gs, double width, double height) {
@@ -66,7 +83,7 @@ public class Gui extends JPanel {
             if (pair == coordinate_pairs.get(coordinate_pairs.size() - 1)) {
                 Gs.setColor(Color.red);
                 if (coordinate_pairs.size() == total_blocks) {
-                    Gs.setColor(Color.cyan);
+                    Gs.setColor(Color.green);
                 }
                 paint_most_recent(Gs, width, height, scaled_x, scaled_y);
             }
@@ -94,6 +111,7 @@ public class Gui extends JPanel {
 
         paint_partitions(Gs, width, height);
         paint_axes(Gs, width, height);
+        paint_tips(Gs, width, height);
         plot_points(Gs, width, height);
 
     }

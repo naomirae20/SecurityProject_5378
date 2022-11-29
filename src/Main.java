@@ -1,6 +1,7 @@
 import javax.swing.JFrame;
 import java.util.Scanner;
 import java.util.Random;
+import java.util.LinkedList;    // maybe delete? idk
 
 public class Main {
 
@@ -20,6 +21,7 @@ public class Main {
         );
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Gui gui = new Gui(
+            g,
             max_x_coordinate_value, 
             max_y_coordinate_value, 
             search_radius,
@@ -46,8 +48,8 @@ public class Main {
                 x_coordinate, 
                 (max_y_coordinate_value - y_coordinate)
             );
-            gui.repaint();
             g.addBlock("anything", x_coordinate, y_coordinate);
+            gui.repaint();
         }
         System.out.println("COMPLETE!");
         in.close();
