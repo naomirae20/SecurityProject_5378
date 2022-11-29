@@ -1,7 +1,7 @@
 import javax.swing.JFrame;
 import java.util.Scanner;
 import java.util.Random;
-import java.util.LinkedList;    // maybe delete? idk
+//import java.util.LinkedList;    // maybe delete? idk
 
 public class Main {
 
@@ -36,7 +36,7 @@ public class Main {
         Scanner in = new Scanner(System.in);
         Random rand = new Random();
         System.out.println("Whenever you're ready! (Press Enter)");
-        String waiting = in.nextLine();
+        in.nextLine();
 
         // Demo begins
         for (int i = 0; i < number_of_blocks; i++) {
