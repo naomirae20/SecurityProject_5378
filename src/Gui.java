@@ -38,7 +38,7 @@ public class Gui extends JPanel {
                 double y1 = (coordinate_pairs.get(i)[1] / max_y_coordinate_value) * (height - 2 * margin) + margin;
                 for (Block b : graph.getNeighbors(i)) {
                     double x2 = (b.x / max_x_coordinate_value) * (width - 2 * margin) + margin;
-                    double y2 = ((50 - b.y) / max_y_coordinate_value) * (height - 2 * margin) + margin;
+                    double y2 = ((max_y_coordinate_value - b.y) / max_y_coordinate_value) * (height - 2 * margin) + margin;
                     Gs.draw(new Line2D.Double(x1, y1, x2, y2));
                 }
             }
