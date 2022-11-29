@@ -38,17 +38,22 @@ public class Driver {
 
         System.out.println("Now you can manually enter new block data: ");
         Scanner in = new Scanner(System.in);
-        while (true) {
-            System.out.print("Data: ");
-            String data = in.nextLine();
-            if (data.equalsIgnoreCase("q")) return;
-            System.out.print("x: ");
-            int x = Integer.parseInt(in.nextLine());
-            System.out.print("y: ");
-            int y = Integer.parseInt(in.nextLine());
-            
-            g.addBlock(data, x, y);
-            displayGraph(g);
+        try{
+            while (true) {
+                System.out.print("Data: ");
+                String data = in.nextLine();
+                if (data.equalsIgnoreCase("q")) return;
+                System.out.print("x: ");
+                int x = Integer.parseInt(in.nextLine());
+                System.out.print("y: ");
+                int y = Integer.parseInt(in.nextLine());
+                
+                g.addBlock(data, x, y);
+                displayGraph(g);
+            }
+        } finally{
+            in.close();
         }
+        
     }
 }
