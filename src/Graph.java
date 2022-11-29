@@ -7,7 +7,7 @@ import java.util.Random;
 public class Graph
 {
     public int difficulty = 4;  // arbitrary
-    public double searchRadius = 4.0;
+    public double searchRadius = 10.0;
 
     public final ArrayList<Block> graph = new ArrayList<>();
     private final ArrayList<LinkedList<Block>> neighborLists = new ArrayList<>();
