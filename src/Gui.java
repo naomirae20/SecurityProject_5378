@@ -2,7 +2,7 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.geom.*;
 import java.util.ArrayList;
-import java.util.LinkedList;
+//import java.util.LinkedList;
 
 public class Gui extends JPanel {
 

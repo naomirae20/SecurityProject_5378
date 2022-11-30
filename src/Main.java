@@ -34,24 +34,40 @@ public class Main {
 
         // Wait for user to start the demo
         Scanner in = new Scanner(System.in);
-        Random rand = new Random();
-        System.out.println("Whenever you're ready! (Press Enter)");
-        in.nextLine();
+        try{
+            Random rand = new Random();
+            System.out.println("Whenever you're ready! (Press Enter)");
+            in.nextLine();
 
-        // Demo begins
-        for (int i = 0; i < number_of_blocks; i++) {
-            int x_coordinate = rand.nextInt(max_x_coordinate_value);
-            int y_coordinate = rand.nextInt(max_y_coordinate_value);
-            System.out.println("Adding new point at: " + 
-                                x_coordinate + " " + y_coordinate + "...");
-            gui.add_coordinate_pair(
-                x_coordinate, 
-                (max_y_coordinate_value - y_coordinate)
-            );
-            g.addBlock("anything", x_coordinate, y_coordinate);
-            gui.repaint();
+            // Demo begins
+            for (int i = 0; i < number_of_blocks; i++) {
+                int x_coordinate = rand.nextInt(max_x_coordinate_value);
+                int y_coordinate = rand.nextInt(max_y_coordinate_value);
+                System.out.println("Adding new point at: " + 
+                                    x_coordinate + " " + y_coordinate + "...");
+                gui.add_coordinate_pair(
+                    x_coordinate, 
+                    (max_y_coordinate_value - y_coordinate)
+                );
+                g.addBlock("anything", x_coordinate, y_coordinate);
+                gui.repaint();
+            }
+
+            System.out.println("Now you can manually enter new block data: ");
+            while (true){
+                System.out.print("Data: ");
+                String data = in.nextLine();
+                if (data.equalsIgnoreCase("q")) return;
+                System.out.print("x: ");
+                int x = Integer.parseInt(in.nextLine());
+                System.out.print("y: ");
+                int y = Integer.parseInt(in.nextLine());
+                gui.add_coordinate_pair(x, y);
+                g.addBlock(data, x, y);
+                gui.repaint();
+            }
+        } finally{
+            in.close();
         }
-        System.out.println("COMPLETE!");
-        in.close();
     }
 }
