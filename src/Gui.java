@@ -100,7 +100,7 @@ public class Gui extends JPanel {
             double adjusted_y = scaled_y - (block_thickness_in_pixels / 2.0);
             if (pair == coordinate_pairs.get(coordinate_pairs.size() - 1)) {
                 Gs.setColor(Color.red);
-                if (coordinate_pairs.size() == total_blocks) {
+                if (coordinate_pairs.size() >= total_blocks) {
                     Gs.setColor(Color.green);
                 }
                 paint_most_recent(Gs, width, height, scaled_x, scaled_y);

@@ -43,8 +43,8 @@ public class Main {
             for (int i = 0; i < number_of_blocks; i++) {
                 int x_coordinate = rand.nextInt(max_x_coordinate_value);
                 int y_coordinate = rand.nextInt(max_y_coordinate_value);
-                System.out.println("Adding new point at: " + 
-                                    x_coordinate + " " + y_coordinate + "...");
+                System.out.println("Adding new point at: (" + 
+                                    x_coordinate + ", " + y_coordinate + ").");
                 gui.add_coordinate_pair(
                     x_coordinate, 
                     (max_y_coordinate_value - y_coordinate)
@@ -62,7 +62,7 @@ public class Main {
                 int x = Integer.parseInt(in.nextLine());
                 System.out.print("y: ");
                 int y = Integer.parseInt(in.nextLine());
-                gui.add_coordinate_pair(x, y);
+                gui.add_coordinate_pair(x, max_y_coordinate_value - y);
                 g.addBlock(data, x, y);
                 gui.repaint();
             }
