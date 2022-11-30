@@ -38,11 +38,29 @@ public class Gui extends JPanel {
                 double y1 = (coordinate_pairs.get(i)[1] / max_y_coordinate_value) * (height - 2 * margin) + margin;
                 for (Block b : graph.getNeighbors(i)) {
                     double x2 = (b.x / max_x_coordinate_value) * (width - 2 * margin) + margin;
-                    double y2 = ((50 - b.y) / max_y_coordinate_value) * (height - 2 * margin) + margin;
-                    Gs.draw(new Line2D.Double(x1, y1, x2, y2));
+                    double y2 = ((max_y_coordinate_value - b.y) / max_y_coordinate_value) * (height - 2 * margin) + margin;
+                    //Gs.draw(new Line2D.Double(x1, y1, x2, y2));
+                    drawArrow(Gs, x1, y1, x2, y2);
                 }
             }
         }
+    }
+
+    void drawArrow(Graphics g1, double x1, double y1, double x2, double y2) { //https://stackoverflow.com/questions/4112701/drawing-a-line-with-arrow-in-java
+        Graphics2D g = (Graphics2D) g1.create();
+
+        double dx = x2 - x1, dy = y2 - y1;
+        double angle = Math.atan2(dy, dx);
+        int len = (int) (Math.sqrt(dx*dx + dy*dy)-5);
+        AffineTransform at = AffineTransform.getTranslateInstance(x1, y1);
+        at.concatenate(AffineTransform.getRotateInstance(angle));
+        g.transform(at);
+
+        // Draw horizontal arrow starting in (0, 0)
+        int arrowSize = 5;
+        g.drawLine(0, 0, len, 0);
+        g.fillPolygon(new int[] {len, len-arrowSize, len-arrowSize, len},
+                new int[] {0, -arrowSize, arrowSize, 0}, 4);
     }
 
     private void paint_partitions(Graphics2D Gs, double width, double height) {
