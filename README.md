@@ -6,6 +6,8 @@ For Windows, place both files into the same directory and run RUN.bat.
 
 For running in a terminal, run ``java -jar Group15_Tangle.jar``.
 
+For the demo the code was compiled with `javac Main.java` and executed with `java Main`
+
 ## Features
 
 * Tangle graph implementation
